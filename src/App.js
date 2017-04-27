@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import WeatherDisplay from './WeatherDisplay'
 
-import logo from './assets/icons/logo.svg'
 import './App.css'
 
 const PLACES = [
@@ -29,21 +28,22 @@ const PLACES = [
 class App extends Component {
 
     constructor () {
-       super();
-       this.state = {
-           selectedPlace: null
-       }
+        super()
+        this.state = {
+            selectedPlace: null
+        }
     }
 
-    buttonClicked (place) {
-        this.setState({ selectedPlace: place })
+    buttonClicked (selectedPlace) {
+        this.setState({ selectedPlace })
     }
 
     render () {
         const { selectedPlace } = this.state
         return (
             <div className='App'>
-                {PLACES.map((place, index) => {
+                {PLACES.map(
+                    (place, index) =>
                         <button
                             key={index}
                             onClick={() => {
@@ -51,10 +51,9 @@ class App extends Component {
                             }}>
                             {place.name}
                         </button>
-                    }
                 )}
                 {selectedPlace &&
-                <WeatherDisplay key={selectedPlace} place={selectedPlace} />
+                <WeatherDisplay key={selectedPlace.zip} place={selectedPlace} />
                 }
             </div>
         )
