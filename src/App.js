@@ -28,30 +28,34 @@ const PLACES = [
 ]
 class App extends Component {
 
-    state = {
-        selectedPlace : null
+    constructor () {
+       super();
+       this.state = {
+           selectedPlace: null
+       }
     }
 
-    buttonClicked(place){
-        this.setState({selectedPlace: place})
+    buttonClicked (place) {
+        this.setState({ selectedPlace: place })
     }
 
     render () {
+        const { selectedPlace } = this.state
         return (
             <div className='App'>
-                <div className='App-header'>
-                    <img src={logo} className='App-logo' alt='logo' />
-                    <h2>Welcome to React</h2>
-                </div>
                 {PLACES.map((place, index) => {
-                    return (<button key={index} onClick={()=>{this.buttonClicked(place)}}>{place.name}</button>)
-                })}
-                {this.state.selectedPlace &&
-                    <WeatherDisplay place={this.state.selectedPlace}/>
+                        <button
+                            key={index}
+                            onClick={() => {
+                                this.buttonClicked(place)
+                            }}>
+                            {place.name}
+                        </button>
+                    }
+                )}
+                {selectedPlace &&
+                <WeatherDisplay key={selectedPlace} place={selectedPlace} />
                 }
-                <p className='App-intro'>
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
             </div>
         )
     }
